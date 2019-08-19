@@ -5,8 +5,8 @@
 struct Tile
 {
 	int tileNumber = 0;//tile number(ascii)
-	bool passable = true;//possible move tile?
-	bool transparent = true;//block sight?
+	bool passable = false;//possible move tile?
+	bool transparent = false;//block sight?
 	bool visible = false;
 	bool explored = false;
 };
@@ -18,7 +18,7 @@ public:
 	const Tile& getTile(int x, int y) const;
 	void setTile(int x, int y, Tile tile);
 
-	void setBisible(int x, int y, bool flag);
+	void setVisible(int x, int y, bool flag);
 	void setExplored(int x, int y, bool flag);
 
 protected:

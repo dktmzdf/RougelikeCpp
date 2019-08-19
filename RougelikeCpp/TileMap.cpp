@@ -10,8 +10,8 @@ void TileMap::load(const Map& map)
 	const int width = map.getSize().x;
 	const int height = map.getSize().y;
 	m_vertices.resize(width * height * 4);
-	for(int y = 0; y< height; y++)
-		for (int x = 0; x < width; x++)
+	for(int y = 0; y< height; ++y)
+		for (int x = 0; x < width; ++x)
 		{
 			const int tileNumber = map.getTile(x, y).tileNumber;
 
@@ -22,7 +22,7 @@ void TileMap::load(const Map& map)
 			if (map.getTile(x, y).visible)
 				color.a = 255;
 			else if (map.getTile(x, y).explored)
-				color.a = 25;
+				color.a = 75;
 			else
 				continue;
 
@@ -39,6 +39,11 @@ void TileMap::load(const Map& map)
 			quad[1].texCoords = sf::Vector2f((tu + 1.f) * m_tileSize.x, (tv + 0.f) * m_tileSize.y);
 			quad[2].texCoords = sf::Vector2f((tu + 1.f) * m_tileSize.x, (tv + 1.f) * m_tileSize.y);
 			quad[3].texCoords = sf::Vector2f((tu + 0.f) * m_tileSize.x, (tv + 1.f) * m_tileSize.y);
+
+			quad[0].color = color;
+			quad[1].color = color;
+			quad[2].color = color;
+			quad[3].color = color;
 		}
 		
 }

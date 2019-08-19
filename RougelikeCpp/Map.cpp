@@ -22,7 +22,7 @@ void Map::setTile(int x, int y, Tile tile)
 	m_tiles[x + y * m_size.x] = tile;
 }
 
-void Map::setBisible(int x, int y, bool flag)
+void Map::setVisible(int x, int y, bool flag)
 {
 	m_tiles[x + y * m_size.x].visible = flag;
 }

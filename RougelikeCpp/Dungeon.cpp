@@ -1,5 +1,5 @@
 #include "Dungeon.h"
-#include "Rand.h"
+#include "Utility.h"
 
 #include<list>
 

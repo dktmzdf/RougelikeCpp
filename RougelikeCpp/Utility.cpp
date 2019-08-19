@@ -1,4 +1,4 @@
-#include"Rand.h"
+#include"Utility.h"
 
 namespace
 {
@@ -15,4 +15,9 @@ int randomInt(int min, int inclusiveMax)
 	return min + std::uniform_int_distribution<>(0, inclusiveMax - min)(mt);
 
 
+}
+
+int sign(int value)
+{
+	return (value > 0) - (value < 0);
 }

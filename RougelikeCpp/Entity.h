@@ -8,6 +8,7 @@ public:
 	//move function
 	const sf::Vector2i& getPosition() const;
 	void setPosition(int x, int y);
+	void setPosition(sf::Vector2i pos);
 	void move(int dx, int dy);
 
 	//rendering function

@@ -3,6 +3,7 @@
 #include"Entity.h"
 #include"TileMap.h"
 #include"Dungeon.h"
+#include"FOV.h"
 
 int main()
 {
@@ -35,12 +36,17 @@ int main()
 	Dungeon dungeon(screenSize);
 	dungeon.generate();
 
+	Entity player(texture, tileSize, '@');
+	player.setPosition(dungeon.findPassableTile());
+
+	FOV fov;
+	fov.initialize(dungeon, 10);
+	fov.compute(player.getPosition());
+
 	TileMap tileMap(texture, tileSize);
 	tileMap.load(dungeon);
 
 
-	Entity player(texture, tileSize, '@');
-	player.setPosition(screenSize.x / 2, screenSize.y / 2);
 	
 	while (window.isOpen())
 	{
@@ -82,7 +88,12 @@ int main()
 						newPos.x < screenSize.x && newPos.y < screenSize.y)
 					{
 						if (dungeon.getTile(newPos.x, newPos.y).passable)
+						{
 							player.move(dx, dy);
+							//Recompute fov
+							fov.compute(player.getPosition());
+							tileMap.load(dungeon);
+						}
 					}
 				}
 			}

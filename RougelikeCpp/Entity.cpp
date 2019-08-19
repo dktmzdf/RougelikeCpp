@@ -30,6 +30,10 @@ void Entity::setPosition(int x, int y)
 
 
 }
+void Entity::setPosition(sf::Vector2i pos)
+{
+	setPosition(pos.x, pos.y);
+}
 
 void Entity::move(int dx, int dy)
 {
