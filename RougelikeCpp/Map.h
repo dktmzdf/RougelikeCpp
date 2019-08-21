@@ -16,6 +16,7 @@ public:
 	Map(sf::Vector2i size);
 	const sf::Vector2i& getSize() const;
 	const Tile& getTile(int x, int y) const;
+	const Tile& getTile(sf::Vector2i pos) const;
 	void setTile(int x, int y, Tile tile);
 
 	void setVisible(int x, int y, bool flag);

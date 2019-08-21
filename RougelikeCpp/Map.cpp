@@ -17,6 +17,12 @@ const Tile& Map::getTile(int x, int y) const
 	return m_tiles[x + y * m_size.x];
 }
 
+const Tile& Map::getTile(sf::Vector2i pos) const
+{
+	// TODO: insert return statement here
+	return getTile(pos.x,pos.y);
+}
+
 void Map::setTile(int x, int y, Tile tile)
 {
 	m_tiles[x + y * m_size.x] = tile;

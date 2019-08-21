@@ -1,5 +1,8 @@
 #pragma once
 #include "Map.h"
+class World;
+class Entity;
+
 class Dungeon :
 	public Map
 {
@@ -14,11 +17,13 @@ public:
 		int right = 0;
 		int bottom = 0;
 
+
 		std::vector<std::size_t> neighbors;
 	};
 public:
 	Dungeon(sf::Vector2i size);
 	void generate();
+	void placeEntities(World& world, Entity& player);
 
 	sf::Vector2i findPassableTile() const;
 

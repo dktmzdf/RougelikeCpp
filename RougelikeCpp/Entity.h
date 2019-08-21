@@ -1,21 +1,30 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+
+class World;
+
 class Entity
 {
 public:
-	Entity(const sf::Texture& texture, sf::Vector2i tileSize, int tileNumber);
-
+	
+	Entity(World& world, int tileNumber);
 	//move function
 	const sf::Vector2i& getPosition() const;
 	void setPosition(int x, int y);
 	void setPosition(sf::Vector2i pos);
 	void move(int dx, int dy);
+	void move(sf::Vector2i dir);
+
+	void setColor(const sf::Color& color);
+
+	void updateAi();
 
 	//rendering function
 	void draw(sf::RenderWindow& window) const;
 private:
+	World& m_world;
 	sf::Sprite m_sprite;
-	sf::Vector2i m_tileSize;
+	
 	sf::Vector2i m_position;
 
 };

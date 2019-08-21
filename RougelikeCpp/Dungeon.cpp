@@ -1,4 +1,5 @@
 #include "Dungeon.h"
+#include "World.h"
 #include "Utility.h"
 
 #include<list>
@@ -10,6 +11,9 @@ namespace
 
 	constexpr int roomWidthMin= 5;
 	constexpr int roomHeightMin = 5;
+
+	constexpr int maxMonstersPerRoom = 3;
+
 
 	void remove(std::vector<std::size_t>& vector, std::size_t value)
 	{
@@ -46,6 +50,43 @@ void Dungeon::generate()
 	makeRooms();
 	makePassages();
 	removeUnusedWalls();
+}
+
+void Dungeon::placeEntities(World& world, Entity& player)
+{
+	const Room& startRoom = m_rooms[randomInt(m_rooms.size())];
+
+	sf::Vector2i startPos;
+	startPos.x = randomInt(startRoom.left + 1, startRoom.right - 2);
+	startPos.y = randomInt(startRoom.top + 1, startRoom.bottom - 2);
+
+	player.setPosition(startPos);
+
+	for (const auto& room : m_rooms)
+	{
+		if (&room == &startRoom)
+			continue;
+		if (room.width() < roomWidthMin || room.height() < roomHeightMin)
+			continue;
+
+		const int numMonsters = randomInt(0, maxMonstersPerRoom);
+
+		for (int i = 0; i < numMonsters; ++i)
+		{
+			sf::Vector2i pos;
+
+			do {
+				pos.x = randomInt(room.left + 1, room.right - 2);
+				pos.y = randomInt(room.top + 1, room.bottom - 2);
+			} while (world.getEntity(pos));
+
+			auto entity = std::make_unique<Entity>(world, 'o');//Orc;
+			entity->setPosition(pos);
+			entity->setColor({ 52,101,36 });
+
+			world.addEntity(std::move(entity));
+		}
+	}
 }
 
 sf::Vector2i Dungeon::findPassableTile() const
